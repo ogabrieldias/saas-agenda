@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import agendaImg from "../assets/images/agenda.png";
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -87,7 +88,7 @@ export default function LandingPage() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          src="\src\assets\images\agenda.png"
+          src={agendaImg}
           alt="Demonstração do sistema"
           className="rounded-lg shadow-lg mx-auto"
         />
