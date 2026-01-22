@@ -4,7 +4,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Imagens (substitua pelos seus arquivos)
-import agendaImg from "../../public/videos/agenda.mp4";
 import heroImg from "../assets/images/agenda.png";
 import feature1Img from "../assets/images/agendamento.png";
 import feature2Img from "../assets/images/clientes.png";
@@ -116,7 +115,7 @@ export default function LandingPage() {
         <h2 className="text-4xl font-bold mb-12">Veja como funciona</h2>
         <video
           ref={demoImgRef}
-          src={agendaImg}
+          src="/videos/agenda.mp4"   // ✅ caminho absoluto para public
           controls
           autoPlay
           loop
@@ -124,6 +123,7 @@ export default function LandingPage() {
           className="rounded-2xl shadow-2xl mx-auto max-w-4xl"
         />
       </section>
+
 
 
 
