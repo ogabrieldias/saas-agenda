@@ -115,11 +115,11 @@ export default function LandingPage() {
         <h2 className="text-4xl font-bold mb-12">Veja como funciona</h2>
         <video
           ref={demoImgRef}
-          src="/videos/agenda.mp4"   // ✅ caminho absoluto para public
-          controls
+          src="videos/Agenda.mp4"   // ✅ caminho absoluto para public
           autoPlay
           loop
           muted
+          playsInline
           className="rounded-2xl shadow-2xl mx-auto max-w-4xl"
         />
       </section>
