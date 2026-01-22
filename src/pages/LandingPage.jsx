@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Imagens (substitua pelos seus arquivos)
-import agendaImg from "../assets/videos/agenda.mp4";
+import agendaImg from "../../public/videos/agenda.mp4";
 import heroImg from "../assets/images/agenda.png";
 import feature1Img from "../assets/images/agendamento.png";
 import feature2Img from "../assets/images/clientes.png";
