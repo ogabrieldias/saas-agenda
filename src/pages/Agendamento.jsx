@@ -27,6 +27,7 @@
     const [servicos, setServicos] = useState([]);
     const [editId, setEditId] = useState(null);
     const [userUid, setUserUid] = useState(null);
+    const [editando, setEditando] = useState(null);
     const navigate = useNavigate();
 
     const { id } = useParams();
@@ -171,13 +172,18 @@
       }
     };
 
-    const removerAgendamento = async (idParaRemover) => {
+    const removerAgendamento = async (agendamento) => {
+      const confirmacao = window.confirm(
+      `Tem certeza que deseja excluir o serviço "${agendamento.titulo}"?`
+    );
+    if (!confirmacao) return;
+
       try {
         const baseUserId = adminIdFromState || userUid;
         const userDoc = doc(db, "usuarios", baseUserId);
-        const agendDoc = doc(userDoc, "agendamentos", idParaRemover);
+        const agendDoc = doc(userDoc, "agendamentos", agendamento.id);
         await deleteDoc(agendDoc);
-        setAgendamentos(agendamentos.filter((a) => a.id !== idParaRemover));
+        setAgendamentos(agendamentos.filter((a) => a.id !== agendamento.id));
       } catch (error) {
         console.error("Erro ao remover agendamento:", error);
       }
@@ -197,6 +203,15 @@
     const cancelarEdicao = () => {
       console.log("[Editar] Cancelando edição. Limpando estados e voltando para /agendamento");
       
+      setEditando(null);
+      setTitulo("");
+      setData("");
+      setHora("");
+      setClienteId("");
+      setProfissionalId("");
+      setServicoId("");
+      setStatus("");
+      setEditId("");
       navigate("/agendamento"); // ✅ volta para rota sem :id
     };
 
@@ -441,7 +456,7 @@
                       {editId !== a.id && (
                         <button
                           className="btn btn-error btn-sm"
-                          onClick={() => removerAgendamento(a.id)}
+                          onClick={() => removerAgendamento(a)}
                         >
                           Remover
                         </button>

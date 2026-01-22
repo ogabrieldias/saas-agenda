@@ -100,11 +100,16 @@ export default function Clientes() {
     }
   };
 
-  const removerCliente = async (id) => {
+  const removerCliente = async (cliente) => {
+    const confirmacao = window.confirm(
+      `Tem certeza que deseja excluir o serviço "${cliente.nome}"?`
+    );
+    if (!confirmacao) return;
+
     try {
-      const clienteDoc = doc(db, "usuarios", userUid, "clientes", id);
+      const clienteDoc = doc(db, "usuarios", userUid, "clientes", cliente.id);
       await deleteDoc(clienteDoc);
-      setClientes(clientes.filter((c) => c.id !== id));
+      setClientes(clientes.filter((c) => c.id !== cliente.id));
     } catch (error) {
       console.error("Erro ao remover cliente:", error);
     }
@@ -237,7 +242,7 @@ export default function Clientes() {
                 {!editando && (
                   <button
                     className="btn btn-error btn-sm"
-                    onClick={() => removerCliente(c.id)}
+                    onClick={() => removerCliente(c)}
                   >
                     Remover
                   </button>

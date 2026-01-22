@@ -172,47 +172,62 @@ export default function RelatoriosDashboard() {
         </div>
       </div>
 
-      {/* Gráfico de Serviços */}
-      <div className="mb-8">
-        <h2 className="text-xl font-semibold mb-3">Serviços mais agendados</h2>
-        <Bar
-          data={{
-            labels: servicoLabels,
-            datasets: [
-              {
-                label: "Quantidade de Agendamentos",
-                data: servicoData,
-                backgroundColor: "rgba(75, 192, 192, 0.6)",
-              },
-            ],
-          }}
-          options={{ responsive: true, plugins: { legend: { display: false } } }}
-        />
-      </div>
+      {/* Gráficos em grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        {/* Gráfico de Serviços */}
+        <div className="p-4 bg-base-200 rounded shadow h-96">
+          <h2 className="text-xl font-semibold mb-3">Serviços mais agendados</h2>
+          <Bar
+            data={{
+              labels: servicoLabels,
+              datasets: [
+                {
+                  label: "Quantidade de Agendamentos",
+                  data: servicoData,
+                  backgroundColor: "rgba(75, 192, 192, 0.6)",
+                },
+              ],
+            }}
+            options={{
+              responsive: true,
+              maintainAspectRatio: false, // ✅ adapta ao card
+              plugins: { legend: { display: false } },
+            }}
+          />
+        </div>
 
-      {/* Gráfico de Profissionais */}
-      <div>
-        <h2 className="text-xl font-semibold mb-3">Profissionais com mais atendimentos</h2>
-        <Pie
-          data={{
-            labels: profissionalLabels,
-            datasets: [
-              {
-                label: "Atendimentos",
-                data: profissionalData,
-                backgroundColor: [
-                  "rgba(255, 99, 132, 0.6)",
-                  "rgba(54, 162, 235, 0.6)",
-                  "rgba(255, 206, 86, 0.6)",
-                  "rgba(75, 192, 192, 0.6)",
-                  "rgba(153, 102, 255, 0.6)",
-                  "rgba(255, 159, 64, 0.6)",
-                ],
+        {/* Gráfico de Profissionais */}
+        <div className="p-4 bg-base-200 rounded shadow h-96">
+          <h2 className="text-xl font-semibold mb-3">Profissionais com mais atendimentos</h2>
+          <Pie
+            data={{
+              labels: profissionalLabels,
+              datasets: [
+                {
+                  label: "Atendimentos",
+                  data: profissionalData,
+                  backgroundColor: [
+                    "rgba(255, 99, 132, 0.6)",
+                    "rgba(54, 162, 235, 0.6)",
+                    "rgba(255, 206, 86, 0.6)",
+                    "rgba(75, 192, 192, 0.6)",
+                    "rgba(153, 102, 255, 0.6)",
+                    "rgba(255, 159, 64, 0.6)",
+                  ],
+                },
+              ],
+            }}
+            options={{
+              responsive: true,
+              maintainAspectRatio: false, // ✅ adapta ao card
+              plugins: {
+                legend: {
+                  position: "bottom", // legenda abaixo para melhor distribuição
+                },
               },
-            ],
-          }}
-          options={{ responsive: true }}
-        />
+            }}
+          />
+        </div>
       </div>
     </div>
   );

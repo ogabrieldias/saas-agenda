@@ -71,20 +71,19 @@ export default function Profissionais() {
     }
   };
 
-  const removerProfissional = async (id) => {
+  const removerProfissional = async (profissional) => {
+    const confirmacao = window.confirm(
+      `Tem certeza que deseja excluir o serviço "${profissional.nome}"?`
+    );
+    if (!confirmacao) return;
+
     try {
-      const profDoc = doc(db, "usuarios", userUid, "profissionais", id);
+      const profDoc = doc(db, "usuarios", userUid, "profissionais", profissional.id);
       await deleteDoc(profDoc);
-      setProfissionais(profissionais.filter((p) => p.id !== id));
+      setProfissionais(profissionais.filter((p) => p.id !== profissional.id));
     } catch (error) {
       console.error("Erro ao remover profissional:", error);
     }
-  };
-
-  const editarProfissional = (profissional) => {
-    setNome(profissional.nome);
-    setEspecialidade(profissional.especialidade);
-    setEditando(profissional.id);
   };
 
   const cancelarEdicao = () => {
@@ -92,6 +91,12 @@ export default function Profissionais() {
     setNome("");
     setEspecialidade("");
     setErro("");
+  };
+
+  const editarProfissional = (profissional) => {
+    setNome(profissional.nome);
+    setEspecialidade(profissional.especialidade);
+    setEditando(profissional.id);
   };
 
   // Estados para filtro
@@ -185,7 +190,7 @@ export default function Profissionais() {
                 {!editando && (
                   <button
                     className="btn btn-error btn-sm"
-                    onClick={() => removerProfissional(p.id)}
+                    onClick={() => removerProfissional(p)}
                   >
                     Remover
                   </button>
